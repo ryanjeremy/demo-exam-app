@@ -1,0 +1,23 @@
+{
+  "name": "demo-exam-app",
+  "version": "1.0.0",
+  "description": "Demo exam application using Express.js and React.js",
+  "main": "server/server.js",
+  "author": "RJP",
+  "license": "MIT",
+  "scripts": {
+    "client": "cd client && yarn start",
+    "server": "cd server && nodemon server.js",
+    "install-client-dependencies": "cd client && yarn install",
+    "install-server-dependencies": "yarn install",
+    "install-dependencies": "yarn install-client-dependencies;yarn install-server-dependencies",
+    "start": "concurrently --kill-others \"yarn server\" \"yarn client\""
+  },
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "concurrently": "^3.6.0",
+    "nodemon": "^1.18.3"
+  }
+}
