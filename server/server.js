@@ -4,7 +4,9 @@ const bodyParser = require("body-parser");
 const app = express();
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -18,15 +20,15 @@ app.get('/api/:resource/:action', (req, res) => {
 
   const dispatchResponse = function(status, result) {
     res.status(status).send({
-       result
-     });
+      result
+    });
   };
 
-	if (resource === "test") {
-		dispatchResponse(200, "success");
-	} else {
-		dispatchResponse(400, "invalid response");
-	}
+  if (resource === "test") {
+    dispatchResponse(200, "success");
+  } else {
+    dispatchResponse(400, "invalid response");
+  }
 });
 
 app.listen(config.PORT, () => console.log(`Listening on ${config.PORT}.`));

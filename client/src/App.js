@@ -4,24 +4,24 @@ import './App.css';
 
 class App extends Component {
 	state = {
-		initialText: "Loading..."
+	  initialText: "Loading..."
 	};
-	
-  componentDidMount() {
-    fetch('http://localhost:5000/api/test/get')
-    .then(response => response.json())
-    .then(jsonResponse => {
-      this.setState({
-        initialText: jsonResponse.result
-      });
-    })
-    .catch(error => {
-        this.setState({
-          initialText: "Error loading initial text from API"
-        });
-    });
-  }
 
+	componentDidMount() {
+	  fetch('http://localhost:5000/api/test/get')
+	    .then(response => response.json())
+	    .then(jsonResponse => {
+	      this.setState({
+	        initialText: jsonResponse.result
+	      });
+	    })
+	    .catch(error => {
+	      this.setState({
+	        initialText: "Error loading initial text from API"
+	      });
+	    });
+	}
+	
   render() {
     return (
       <div className="App">
