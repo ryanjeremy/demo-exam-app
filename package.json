@@ -11,7 +11,8 @@
     "install-client-dependencies": "cd client && yarn install",
     "install-server-dependencies": "yarn install",
     "install-dependencies": "yarn install-client-dependencies;yarn install-server-dependencies",
-    "start": "concurrently --kill-others \"yarn server\" \"yarn client\""
+    "start": "concurrently --kill-others \"yarn server\" \"yarn client\"",
+    "test": "concurrently --kill-others \"yarn server\" \"cd client && yarn test\""
   },
   "dependencies": {
     "express": "^4.16.3"

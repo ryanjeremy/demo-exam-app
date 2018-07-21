@@ -1,4 +1,5 @@
-const config = require('./config.js');
+const api = require('./api');
+const config = require('./config/config');
 const express = require('express');
 const bodyParser = require("body-parser");
 const app = express();
@@ -8,27 +9,12 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
 
-app.get('/api/:resource/:action', (req, res) => {
-  const resource = req.params.resource;
-  const action = req.params.action;
-
-  const dispatchResponse = function(status, result) {
-    res.status(status).send({
-      result
-    });
-  };
-
-  if (resource === "test") {
-    dispatchResponse(200, "success");
-  } else {
-    dispatchResponse(400, "invalid response");
-  }
-});
+app.all('/api/:resource/:action', api);
 
 app.listen(config.PORT, () => console.log(`Listening on ${config.PORT}.`));
