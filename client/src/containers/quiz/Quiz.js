@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import { registerResponse, setQuizError } from '../../actions/quizActions';
 import Panel from '../../components/Panel';
 import CodePreview from './CodePreview';
+import QuizDropdown from './QuizDropdown';
+import QuizInput from './QuizInput';
+import QuizToggle from './QuizToggle';
 
 class Quiz extends Component {
   constructor(props) {
@@ -31,6 +34,10 @@ class Quiz extends Component {
     }
   }
 
+  componentDidUpdate() {
+    console.log(this.props.responses);
+  }
+
   setQuestion(quizIndex) {
     const question = this.props.quiz[quizIndex];
     const response = {
@@ -54,7 +61,27 @@ class Quiz extends Component {
   }
 
   buttonClick() {
+    if (!this.state.loading) {
+      if (!this.state.response || this.state.response.response === "") {
+        this.props.setQuizError("Please answer the question belore before continuing.");
+      } else {
+        this.props.registerResponse(
+          this.state.response.id,
+          this.state.response.type,
+          this.state.response.response
+        );
 
+        if (this.state.quizIndex === this.props.quiz.length - 1) {
+          this.setState({
+            loading: true
+          }, () => {
+            // forward to results
+          });
+        } else {
+          this.setQuestion(this.state.quizIndex + 1);
+        }
+      }
+    }
   }
 
   render() {
@@ -66,14 +93,34 @@ class Quiz extends Component {
         title="Coding Quiz"
         error={this.props.error}
         buttonText={this.state.quizIndex === this.props.quiz.length - 1 ? "Complete" : "Next Question"}
-        buttonOnClick={this.buttonCLick}
+        buttonOnClick={this.buttonClick}
         loading={this.state.loading}
       >
         <h4>{"Question #" + (this.state.quizIndex + 1)}</h4>
+
         {question.code && (
           <CodePreview code={question.code} />
         )}
-        <p>{question.text}</p>
+
+        {question.type === "input" ? (
+          <QuizInput
+            label={question.text}
+            response={this.state.response.response}
+            setResponse={this.setResponse}
+          />
+        ) : question.type === "dropdown" ? (
+          <QuizDropdown
+            label={question.text}
+            setResponse={this.setResponse}
+            options={question.options}
+          />
+        ) : question.type === "toggle" && (
+          <QuizToggle
+            label={question.text}
+            response={this.state.response.response}
+            setResponse={this.setResponse}
+          />
+        )}
       </Panel>
     );
   }

@@ -23,7 +23,8 @@ const quiz = (state = QUIZ_STATE, action) => {
             type: action.questionType,
             response: action.response
           }
-        ]
+        ],
+        error: null
       });
 
     case config.QUIZ_ACTION_RESTART:
