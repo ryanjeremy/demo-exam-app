@@ -5,7 +5,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import reducer from './reducers';
-import TestComponent from './components/testComponent';
+import Init from './containers/init/Init';
 
 import './style.scss';
 
@@ -16,7 +16,7 @@ const store = createStore(reducer, applyMiddleware(
 const App = () => (
   <Provider store={store}>
     <Router>
-      <Route exact path="/" component={TestComponent} />
+      <Route exact path="/" component={Init} />
     </Router>
   </Provider>
 );

@@ -10,6 +10,7 @@ export const createQuiz = (quiz) => {
 
 export const fetchQuiz = () => {
   return dispatch => {
+    dispatch(setQuizError(null));
     getQuiz()
       .then(quiz => {
         dispatch(createQuiz(quiz));
