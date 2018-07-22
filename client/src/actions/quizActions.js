@@ -15,7 +15,7 @@ export const fetchQuiz = () => {
         dispatch(createQuiz(quiz));
       })
       .catch(error => {
-        dispatch(setQuizError("There was an error processing your request. Please try again."))
+        dispatch(setQuizError("There was an error processing your request. Please try again."));
       });
   }
 }
