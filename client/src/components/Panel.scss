@@ -1,0 +1,71 @@
+.panel {
+  background: rgba(255, 255, 255, 0.8);
+  height: calc(100vh - 120px);
+  margin-top: 60px;
+  border-radius: 2px;
+  overflow: hidden;
+
+  .top-content {
+    width: 100%;
+    padding: 20px !important;
+  }
+
+  .bottom-button {
+    background-color: #d25353;
+    width: 100%;
+    color: #fff;
+    border: 0;
+    outline: none;
+    font-size: 38px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-align: center;
+    padding: 10px 20px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #cd4f4f;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      position: relative;
+      margin: 10px auto;
+    }
+
+    .double-bounce1, .double-bounce2 {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background-color: #fff;
+      opacity: 0.6;
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+      animation: sk-bounce 2.0s infinite ease-in-out;
+    }
+
+    .double-bounce2 {
+      -webkit-animation-delay: -1.0s;
+      animation-delay: -1.0s;
+    }
+
+    @-webkit-keyframes sk-bounce {
+      0%, 100% { -webkit-transform: scale(0.0) }
+      50% { -webkit-transform: scale(1.0) }
+    }
+
+    @keyframes sk-bounce {
+      0%, 100% {
+        transform: scale(0.0);
+        -webkit-transform: scale(0.0);
+      } 50% {
+        transform: scale(1.0);
+        -webkit-transform: scale(1.0);
+      }
+    }
+  }
+}

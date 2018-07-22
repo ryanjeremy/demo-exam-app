@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchQuiz } from '../actions/quizActions';
+import Panel from './Panel';
 
 class TestComponent extends Component {
   componentDidMount() {
@@ -12,13 +13,22 @@ class TestComponent extends Component {
   }
 
   render() {
-    return this.props.error ? (
-      <p>{this.props.error}</p>
-    ) : this.props.questions.length === 0 ? (
-      <p>Loading...</p>
-    ) : this.props.questions.map((question, index) => (
-      <p key={index}>{question.text}</p>
-    ));
+    return (
+      <Panel
+        title="Coding Quiz"
+        buttonText="Begin Quiz!"
+        buttonOnClick={() => console.log("clicked")}
+        loading={false}
+      >
+        {this.props.error ? (
+          <p>{this.props.error}</p>
+        ) : this.props.questions.length === 0 ? (
+          <p>Loading...</p>
+        ) : this.props.questions.map((question, index) => (
+          <p key={index}>{question.text}</p>
+        ))}
+      </Panel>
+    )
   }
 }
 
