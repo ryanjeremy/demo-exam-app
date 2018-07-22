@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import reducer from './reducers';
 import Init from './containers/init/Init';
+import Quiz from './containers/quiz/Quiz';
 
 import './style.scss';
 
@@ -16,7 +17,10 @@ const store = createStore(reducer, applyMiddleware(
 const App = () => (
   <Provider store={store}>
     <Router>
-      <Route exact path="/" component={Init} />
+      <div>
+        <Route exact path="/" component={Init} />
+        <Route exact path="/quiz" component={Quiz} />
+      </div>
     </Router>
   </Provider>
 );

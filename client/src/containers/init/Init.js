@@ -21,7 +21,7 @@ class Init extends Component {
         loading: false
       });
     } else if (prevProps.quiz.length === 0 && this.props.quiz.length > 0) {
-      console.log(this.props.quiz);
+      this.props.history.replace("/quiz");
     }
   }
 
@@ -36,16 +36,18 @@ class Init extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <Panel
         title="Coding Quiz"
         error={this.props.error}
-        buttonText="Begin Quiz!"
+        buttonText="Begin Quiz"
         buttonOnClick={this.setQuiz}
         loading={this.state.loading}
       >
         <h4>Ready To Get Started!?</h4>
-        <p>{"We'll go ahead and test your coding experience with 3 simple questions. There's no time limit, so take your time! Good luck!"}</p>
+        <p>{"We'll go ahead and test your coding experience with 3 simple questions. There's no time limit, so take your time! However, once you move on from a question, you won't be able to go back. So be sure to review your answer carefully!"}</p>
+        <p>Good luck!</p>
       </Panel>
     );
   }
