@@ -11,11 +11,11 @@
     "install-client-dependencies": "cd client && yarn install",
     "install-server-dependencies": "yarn install",
     "install-dependencies": "yarn install-client-dependencies;yarn install-server-dependencies",
-    "start": "concurrently --kill-others \"yarn server\" \"yarn client\"",
-    "test": "concurrently --kill-others \"yarn server\" \"cd client && yarn test\""
+    "start": "concurrently --kill-others \"yarn server\" \"yarn client\""
   },
   "dependencies": {
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "concurrently": "^3.6.0",
