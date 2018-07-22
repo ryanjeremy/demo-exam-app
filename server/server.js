@@ -4,10 +4,8 @@ const express = require('express');
 const bodyParser = require("body-parser");
 const app = express();
 
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -15,6 +13,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.all('/api/:resource/:action', api);
+app.get('/api/:resource/:action', api);
+app.post('/api/:resource/:action', api);
 
 app.listen(config.PORT, () => console.log(`Listening on ${config.PORT}.`));

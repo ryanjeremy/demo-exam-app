@@ -3,6 +3,7 @@ import * as config from '../config/config';
 const QUIZ_STATE = {
   quiz: [],
   responses: [],
+  score: null,
   error: null
 };
 
@@ -27,10 +28,16 @@ const quiz = (state = QUIZ_STATE, action) => {
         error: null
       });
 
+    case config.QUIZ_ACTION_SCORE:
+      return Object.assign({}, state, {
+        score: action.score
+      });
+
     case config.QUIZ_ACTION_RESTART:
       return {
         quiz: [],
         responses: [],
+        score: null,
         error: null
       };
 

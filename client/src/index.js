@@ -7,6 +7,7 @@ import thunk from 'redux-thunk';
 import reducer from './reducers';
 import Init from './containers/init/Init';
 import Quiz from './containers/quiz/Quiz';
+import Result from './containers/result/Result';
 
 import './style.scss';
 
@@ -20,6 +21,7 @@ const App = () => (
       <div>
         <Route exact path="/" component={Init} />
         <Route exact path="/quiz" component={Quiz} />
+        <Route exact path="/result" component={Result} />
       </div>
     </Router>
   </Provider>

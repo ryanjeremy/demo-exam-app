@@ -1,17 +1,10 @@
 import * as config from '../config/config';
-import { getQuiz } from '../config/api';
-
-export const createQuiz = (quiz) => {
-  return {
-    type: config.QUIZ_ACTION_CREATE,
-    quiz
-  };
-}
+import * as Api from '../config/api';
 
 export const fetchQuiz = () => {
   return dispatch => {
     dispatch(setQuizError(null));
-    getQuiz()
+    Api.getQuiz()
       .then(quiz => {
         dispatch(createQuiz(quiz));
       })
@@ -21,12 +14,40 @@ export const fetchQuiz = () => {
   }
 }
 
+export const scoreQuiz = () => {
+  return (dispatch, getState) => {
+    const { quiz } = getState();
+    Api.getScore(quiz.responses)
+      .then(result => {
+        console.log(result.score);
+        dispatch(registerScore(result.score));
+      })
+      .catch (error => {
+        dispatch(setQuizError("There was an error processing your request. Please try again."));
+      });
+  }
+}
+
+export const createQuiz = (quiz) => {
+  return {
+    type: config.QUIZ_ACTION_CREATE,
+    quiz
+  };
+}
+
 export const registerResponse = (id, questionType, response) => {
   return {
     type: config.QUIZ_ACTION_RESPONSE,
     id,
     questionType,
     response
+  };
+}
+
+export const registerScore = score => {
+  return {
+    type: config.QUIZ_ACTION_SCORE,
+    score
   };
 }
 

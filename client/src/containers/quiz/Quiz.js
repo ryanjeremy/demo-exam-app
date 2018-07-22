@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { registerResponse, setQuizError } from '../../actions/quizActions';
+import { registerResponse, setQuizError, scoreQuiz } from '../../actions/quizActions';
 import Panel from '../../components/Panel';
 import CodePreview from './CodePreview';
 import QuizDropdown from './QuizDropdown';
@@ -26,7 +26,7 @@ class Quiz extends Component {
     if (this.props.quiz.length === 0) {
       this.props.history.replace("/");
     } else if (this.props.responses.length === this.props.quiz.length) {
-
+      this.props.history.replace("/result");
     } else {
       const quizIndex = this.props.responses.length > 0
         ? this.props.responses.length : 0;
@@ -34,8 +34,30 @@ class Quiz extends Component {
     }
   }
 
-  componentDidUpdate() {
-    console.log(this.props.responses);
+  componentDidUpdate(prevProps) {
+    if (prevProps.responses.length < this.props.responses.length) {
+       // safe response update
+      if (this.props.responses.length === this.props.quiz.length) {
+        this.setState({
+          loading: true
+        }, () => this.props.scoreQuiz());
+      } else {
+        this.setState(state => {
+          const nextQuestion = this.props.quiz[state.quizIndex + 1];
+          return {
+            quizIndex: state.quizIndex + 1,
+            response: {
+              id: nextQuestion.id,
+              type: nextQuestion.type,
+              response: ""
+            }
+          };
+        });
+      }
+    } else if (!prevProps.quizScore && this.props.quizScore !== null) {
+      // safe to redirect after score has been resolved
+      this.props.history.replace("/result");
+    }
   }
 
   setQuestion(quizIndex) {
@@ -70,16 +92,6 @@ class Quiz extends Component {
           this.state.response.type,
           this.state.response.response
         );
-
-        if (this.state.quizIndex === this.props.quiz.length - 1) {
-          this.setState({
-            loading: true
-          }, () => {
-            // forward to results
-          });
-        } else {
-          this.setQuestion(this.state.quizIndex + 1);
-        }
       }
     }
   }
@@ -128,6 +140,7 @@ class Quiz extends Component {
 
 Quiz.propTypes = {
   quiz: PropTypes.array.isRequired,
+  score: PropTypes.number,
   error: PropTypes.string,
   responses: PropTypes.array.isRequired,
   registerResponse: PropTypes.func.isRequired,
@@ -136,13 +149,15 @@ Quiz.propTypes = {
 
 const mapStateToProps = state => ({
   quiz: state.quiz.quiz,
+  quizScore: state.quiz.score,
   error: state.quiz.error,
   responses: state.quiz.responses
 });
 
 const mapDispatchToProps = dispatch => ({
   registerResponse: (id, questionType, response) => dispatch(registerResponse(id, questionType, response)),
-  setQuizError: error => dispatch(setQuizError(error))
+  setQuizError: error => dispatch(setQuizError(error)),
+  scoreQuiz: () => dispatch(scoreQuiz())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Quiz);

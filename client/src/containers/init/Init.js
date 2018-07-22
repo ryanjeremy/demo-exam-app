@@ -36,7 +36,6 @@ class Init extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <Panel
         title="Coding Quiz"
