@@ -47,7 +47,7 @@
       "options": [
         {
           "text": "42",
-          "correct": true
+          "correct": false
         },
         {
           "text": "18",
