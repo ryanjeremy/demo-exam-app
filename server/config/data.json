@@ -17,16 +17,76 @@
           "correct": false
         }
       ]
+    },
+    {
+      "id": "react-component-update",
+      "text": "In a React component, which function is used to monitor state and property updates?",
+      "options": [
+        {
+          "text": "componentDidUpdate",
+          "correct": true
+        },
+        {
+          "text": "componentHasUpdated",
+          "correct": false
+        },
+        {
+          "text": "React components are conscious entities.",
+          "correct": false
+        },
+        {
+          "text": "You can't monitor updates on a React component.",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "test-code",
+      "code": "function res(a, b, c) {\n  return a+b*c;\n}\n\nconst num = res(12, 2, 3);",
+      "text": "Evaluate the above code. What will the value of 'num' resolve to?",
+      "options": [
+        {
+          "text": "42",
+          "correct": true
+        },
+        {
+          "text": "18",
+          "correct": true
+        },
+        {
+          "text": "28",
+          "correct": false
+        },
+        {
+          "text": "2,147,483,647",
+          "correct": false
+        }
+      ]
     }
   ],
 
   "input": [
     {
       "id": "math-random",
-      "code": "Math.floor(Math.random() + 4)",
-      "text": "Evaluate the above code. What will be the response?",
+      "code": "var radius = Math.floor(Math.random() + 4);",
+      "text": "Evaluate the above variable. What will it's value be?",
       "correctResponses": [
         "4","four"
+      ]
+    },
+    {
+      "id": "string-upper-case",
+      "code": "var intro = \"hello world\".toUpperCase();",
+      "text": "Evaluate the above variable. What will it's value be?",
+      "correctResponses": [
+        "HELLO WORLD"
+      ]
+    },
+    {
+      "id": "jsx-class",
+      "text": "In a JSX element, which property is used in place of the HTML 'class' property?",
+      "correctResponses": [
+        "className", "classname"
       ]
     }
   ],
@@ -35,6 +95,17 @@
     {
       "id": "switch-end",
       "text": "To finish the execution of a switch statement after a match is found, you would use a 'continue' keyword.",
+      "answer": false
+    },
+    {
+      "id": "mutable-data-types",
+      "text": "Objects and Arrays are immutable data types.",
+      "answer": false
+    },
+    {
+      "id": "visible-variable",
+      "code": "const arrayToLog = ['puppies','kittens','frogs','magic'];\n\nfor(let i = 0; i < arrayToLog.length; i++) {\n  console.log(arrayToLog[i]);\n}\n\nconsole.log(i);",
+      "text": "The above code will successfully log the value of 'i'.",
       "answer": false
     }
   ]
