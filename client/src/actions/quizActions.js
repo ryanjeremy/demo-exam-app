@@ -6,7 +6,7 @@ export const fetchQuiz = () => {
     dispatch(setQuizError(null));
     Api.getQuiz()
       .then(quiz => {
-        dispatch(createQuiz(quiz));
+        setTimeout(() => dispatch(createQuiz(quiz)), 1000);
       })
       .catch(error => {
         dispatch(setQuizError("There was an error processing your request. Please try again."));
@@ -19,7 +19,7 @@ export const scoreQuiz = () => {
     const { quiz } = getState();
     Api.getScore(quiz.responses)
       .then(result => {
-        dispatch(registerScore(result.score));
+        setTimeout(() => dispatch(registerScore(result.score)), 1000);
       })
       .catch (error => {
         dispatch(setQuizError("There was an error processing your request. Please try again."));
