@@ -19,7 +19,6 @@ export const scoreQuiz = () => {
     const { quiz } = getState();
     Api.getScore(quiz.responses)
       .then(result => {
-        console.log(result.score);
         dispatch(registerScore(result.score));
       })
       .catch (error => {

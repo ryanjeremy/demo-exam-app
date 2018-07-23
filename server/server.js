@@ -13,7 +13,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/api/:resource/:action', api);
-app.post('/api/:resource/:action', api);
+app.route('/api/:resource/:action')
+  .get(api)
+  .post(api);
 
 app.listen(config.PORT, () => console.log(`Listening on ${config.PORT}.`));
