@@ -85,7 +85,7 @@ class Quiz extends Component {
   buttonClick() {
     if (!this.state.loading) {
       if (!this.state.response || this.state.response.response === "") {
-        this.props.setQuizError("Please answer the question belore before continuing.");
+        this.props.setQuizError("Please answer the question before continuing.");
       } else {
         this.props.registerResponse(
           this.state.response.id,
